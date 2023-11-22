@@ -57,7 +57,11 @@ class User extends Authenticatable
 
     public function canBorrowBooks()
     {
-        // Define logic to check if the user can borrow more books based on the limit
-        return $this->books_borrowed < config('borrowing.max_books_per_user');
+        return $this->borrows()->count() < config('borrowing.max_books_per_user');
+    }
+
+    public function hasBorrowedBook($bookId)
+    {
+        return $this->books()->where('id', $bookId)->exists();
     }
 }

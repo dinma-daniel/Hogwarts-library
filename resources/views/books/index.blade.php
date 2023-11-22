@@ -19,7 +19,7 @@
       </ul>
       @auth
             <!-- <p>Hello, {{ Auth::user()->name }}!</p> -->
-            <a href="{{ route('user.profile', ['userId' => Auth::user()->id]) }}" style="margin-right: 1rem;" class="btn btn-info">View Your Profile</a>
+            <a href="{{ route('user.profile', ['userId' => Auth::user()->id]) }}" style="margin-right: 1rem;" class="btn btn-outline-info">View Your Profile</a>
         @else
             <p>Please log in to view your profile.</p>
             <!-- Add login/register links or buttons -->

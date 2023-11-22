@@ -30,10 +30,11 @@ class UserController extends Controller
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'password' => bcrypt($validatedData['password']),
+            'role' => 'user', // Assign 'user' role by default
         ]);
 
         auth()->login($user);
-        return redirect('/books');
+        return redirect('/login');
     }
 
     public function showProfile($userId)

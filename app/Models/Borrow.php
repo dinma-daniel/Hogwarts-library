@@ -19,13 +19,12 @@ class Borrow extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function markAsOverdue()
-    {
-        // Check if the return date is past the due date
-        if ($this->return_date === null && Carbon::now()->greaterThan($this->due_date)) {
-            $this->is_overdue = true; // Flagging the borrow as overdue
-            $this->save();
-            // Additional actions such as triggering notifications can be added here
-        }
-    }
+    // public function markAsOverdue()
+    // {
+    //     if ($this->return_date === null && Carbon::now()->greaterThan($this->due_date)) {
+    //         $this->is_overdue = true; // Flagging the borrow as overdue
+    //         $this->save();
+    //         // Additional actions such as triggering notifications can be added here
+    //     }
+    // }
 }
