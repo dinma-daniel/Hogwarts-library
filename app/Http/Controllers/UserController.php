@@ -35,4 +35,12 @@ class UserController extends Controller
         auth()->login($user);
         return redirect('/books');
     }
+
+    public function showProfile($userId)
+    {
+        $user = User::findOrFail($userId);
+        $borrowedBooks = $user->borrows; // Assuming you have a relation named borrowedBooks
+        $borrowedBooks = $user->borrows()->with('book')->get();
+        return view('profile', compact('user', 'borrowedBooks'));
+    }
 }

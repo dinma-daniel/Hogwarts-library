@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Borrow extends Model
 {
@@ -17,5 +18,14 @@ class Borrow extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function markAsOverdue()
+    {
+        // Check if the return date is past the due date
+        if ($this->return_date === null && Carbon::now()->greaterThan($this->due_date)) {
+            $this->is_overdue = true; // Flagging the borrow as overdue
+            $this->save();
+            // Additional actions such as triggering notifications can be added here
+        }
     }
 }

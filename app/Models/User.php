@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function books()
     {
-        return $this->hasMany(Book::class);
+        return $this->belongsToMany(Book::class, 'borrows')->withPivot('borrow_date', 'return_date');
     }
 
     public function borrows()
@@ -54,4 +54,10 @@ class User extends Authenticatable
         return $this->hasMany(Borrow::class);
     }
 
+
+    public function canBorrowBooks()
+    {
+        // Define logic to check if the user can borrow more books based on the limit
+        return $this->books_borrowed < config('borrowing.max_books_per_user');
+    }
 }

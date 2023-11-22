@@ -1,3 +1,4 @@
+<!-- show.blade.php -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,9 @@
     <h1>{{ $book->title }}</h1>
     <p>Author: {{ $book->author }}</p>
     <p>Description: {{ $book->description }}</p>
-    <!-- Add more details here based on your book attributes -->
+    
+
+    <!-- Other book details -->
+
 </body>
 </html>

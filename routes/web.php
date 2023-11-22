@@ -5,6 +5,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\BorrowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,13 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+
+Route::post('/books/{bookId}/borrow', [BorrowController::class, 'borrowBook'])->name('books.borrow');
+Route::post('/borrows/{borrowId}/return', [BorrowController::class, 'returnBook'])->name('borrows.return');
+
+
+Route::get('/users/{userId}/profile', [UserController::class, 'showProfile'])->name('user.profile');
+Route::get('/profile/{userId}', [ProfileController::class, 'showProfile'])->name('profile.show');
+
+
+

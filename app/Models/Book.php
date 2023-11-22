@@ -9,13 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     use HasFactory;
-
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class, 'borrows')->withPivot('borrow_date', 'return_date');
     }
     public function borrows()
-{
-    return $this->hasMany(Borrow::class);
-}
+    {
+        return $this->hasMany(Borrow::class);
+    }
 }

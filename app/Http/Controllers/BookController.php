@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 // use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Book;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -17,6 +18,7 @@ class BookController extends Controller
     public function show($id)
 {
     $book = Book::findOrFail($id);
-    return view('books.show', ['book' => $book]);
+    $user = auth::user();
+    return view('books.show', ['book' => $book, 'user' => $user]);
 }
 }
