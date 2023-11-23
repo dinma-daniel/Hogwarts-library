@@ -21,17 +21,45 @@
       </ul>
       <form method="POST" action="{{ route('logout') }}">
             @csrf <!-- CSRF Protection -->
-            <button class="btn btn-info" type="submit">Logout</button>
+            <button class="btn btn-danger" type="submit">Logout</button>
         </form>
     </div>
   </div>
 </nav>
 
-<div style="margin: 5rem auto; width: 50%;">
-<h2 >User Profile: {{ $user->name }}</h2>
+<div style="margin: 5rem auto; width: 70%;">
+<!-- <h2 >User Profile: {{ $user->name }}</h2> -->
+<h2>List of borrowed books by {{ $user->name }}</h2>
 
-<h4>Borrowed Books:</h4>
+<br>
 @if ($borrowedBooks->isEmpty())
+    <p>None borrowed yet!</p>
+        @else
+<table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Borrowed Date</th>
+                    <th>Return Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach ($borrowedBooks as $borrow)
+                    <tr>
+                        <td>{{ $borrow->book->title }}</td>
+                        <td>{{ $borrow->borrow_date }}</td>
+                        <td>{{ $borrow->due_date }}</td>
+                        
+                    </tr>
+                @endforeach 
+
+                </tbody>
+        </table> 
+        @endif
+
+
+
+<!-- @if ($borrowedBooks->isEmpty())
     <p>None borrowed yet!</p>
         @else
             <ul>
@@ -41,7 +69,7 @@
                 <p>Return Date: {{ $borrow->return_date }}</p>
         @endforeach
     </ul>
-@endif
+@endif -->
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

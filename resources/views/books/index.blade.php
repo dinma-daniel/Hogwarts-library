@@ -26,7 +26,7 @@
         @endauth
       <form method="POST" action="{{ route('logout') }}">
             @csrf <!-- CSRF Protection -->
-            <button class="btn btn-info" type="submit">Logout</button>
+            <button class="btn btn-danger" type="submit">Logout</button>
         </form>
     </div>
   </div>
@@ -41,38 +41,35 @@
             <!-- Add login/register links or buttons -->
         @endauth
 
+
         
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
+
+<div style="display: flex;">
                 @foreach($books as $book)
-                    <tr>
-                        <td><a href="{{ route('books.show', ['id' => $book->id]) }}">
+                <div class="card" style="width: 18rem; margin-right: 2rem;">
+                <!-- <img src="..." class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                    <span> Title: <a href="{{ route('books.show', ['id' => $book->id]) }}">
                                 {{ $book->title }}
-                            </a></td>
-                        <td>{{ $book->author }}</td>
-                        <td>
-                            <!-- Borrow Book button -->
-                            @auth
+                            </a></span>
+                
+                    <p class="card-text">Author: {{ $book->author }}</p>
+                    @auth
                                 <form method="POST" action="{{ route('books.borrow', ['bookId' => $book->id]) }}">
-                                    @csrf <!-- CSRF Protection -->
-                                    <button type="submit" class="btn btn-info">Borrow Book</button>
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">Borrow Book</button>
                                 </form>
                             @else
-                                <!-- Show login prompt -->
                                 <p>Please log in to borrow</p>
                             @endauth
-                        </td>
-                    </tr>
+                </div>
+                </div>
                 @endforeach
+
+                </div>
+<!-- 
             </tbody>
-        </table>
+        </table> -->
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
