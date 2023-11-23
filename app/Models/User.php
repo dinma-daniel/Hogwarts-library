@@ -62,6 +62,6 @@ class User extends Authenticatable
 
     public function hasBorrowedBook($bookId)
     {
-        return $this->books()->where('id', $bookId)->exists();
+        return $this->books()->where('books.id', $bookId)->exists();
     }
 }

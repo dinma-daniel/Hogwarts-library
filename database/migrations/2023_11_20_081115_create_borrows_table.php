@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('book_id')->constrained('books');
             $table->dateTime('borrow_date');
             $table->dateTime('return_date')->nullable();
+            $table->dateTime('due_date')->nullable()->default(now()->addDays(14));
             $table->timestamps();
         });
     }
