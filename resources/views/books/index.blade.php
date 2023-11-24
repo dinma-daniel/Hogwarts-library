@@ -43,8 +43,10 @@
 
 
         
+<!-- Add a search input -->
+<input type="text" id="searchInput" placeholder="Search by letter..." onkeyup="searchBooks()">
 
-<div style="display: flex;">
+<div style="display: flex;" id="bookList">
                 @foreach($books as $book)
                 <div class="card" style="width: 18rem; margin-right: 2rem;">
                 <!-- <img src="..." class="card-img-top" alt="..."> -->
@@ -73,5 +75,45 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <script>
+        function searchBooks() {
+            let query = document.getElementById('searchInput').value.toUpperCase();
+
+            // Fetch books via AJAX and update the book list
+            fetch(`/books/search?query=${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Update the book list
+                    displayBooks(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function displayBooks(books) {
+            // Clear existing book list
+            let bookList = document.getElementById('bookList');
+            bookList.innerHTML = '';
+
+            // Display fetched books
+            books.forEach(book => {
+                // Add book details to the bookList element
+                let bookItem = document.createElement('div');
+                bookItem.innerHTML = `
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">${book.title}</h5>
+                            <p class="card-text">Author: ${book.author}</p>
+                            <!-- Add more book details as needed -->
+                        </div>
+                    </div>
+                `;
+                bookList.appendChild(bookItem);
+            });
+        }
+    </script>
+
 </body>
 </html>

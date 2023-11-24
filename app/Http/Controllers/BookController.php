@@ -16,9 +16,18 @@ class BookController extends Controller
         return view('books.index', ['books' => $books]);
     }
     public function show($id)
-{
-    $book = Book::findOrFail($id);
-    $user = auth::user();
-    return view('books.show', ['book' => $book, 'user' => $user]);
-}
+    {
+        $book = Book::findOrFail($id);
+        $user = auth::user();
+        return view('books.show', ['book' => $book, 'user' => $user]);
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $books = Book::where('title', 'like', $query . '%')->get();
+        
+        return response()->json($books);
+    }
+
 }

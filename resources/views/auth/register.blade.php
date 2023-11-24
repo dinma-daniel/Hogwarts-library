@@ -21,14 +21,14 @@
             <input class="form-control type="email" id="email" name="email" value="{{ old('email') }}" required>
         </div>
 
-        <div class="mb-3">
-            <label for="password" class="form-label">Password:</label>
-            <input class="form-control type="password" id="password" name="password" required>
+       <div class="mb-3">
+          <label for="password" class="form-label">Password:</label>
+           <input class="form-control" type="password" id="password" name="password" required>
         </div>
 
         <div class="mb-3">
-            <label for="password_confirmation" class="form-label">Confirm Password:</label>
-            <input class="form-control type="password" id="password_confirmation" name="password_confirmation" required>
+            <label for="password_confirmation" class="form-label">Password:</label>
+            <input class="form-control" type="password" id="password_confirmation" name="password_confirmation" required>
         </div>
         <a href="{{ route('login') }}">
         Already have an account? Log in.

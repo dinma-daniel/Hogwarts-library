@@ -56,5 +56,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::post('/admin/add-book', [AdminController::class, 'addBook'])->name('admin.add-book');
 
+Route::get('/books/search', [BookController::class, 'search'])->name('books.search');
+
+
 
 
